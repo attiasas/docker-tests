@@ -6,7 +6,11 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   normal-scan:
+    macos:
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
     machine:
+      
       image: ubuntu-2204:2022.04.2
     environment:
       NO_COLOR: TRUE
