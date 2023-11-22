@@ -5,6 +5,28 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  normal-scan:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    environment:
+      NO_COLOR: TRUE
+      JFROG_CLI_LOG_LEVEL: DEBUG
+    steps:
+      - run:
+          name: install cli 
+          command: curl -fL https://install-cli.jfrog.io | sh
+      - run:
+          name: cli config
+          command: jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
+      - run:
+          name: clone repo
+          command: git clone https://github.com/vulnerable-apps/vuln_node_express.git
+      - run:
+          name: move to repo dir 
+          command: cd vuln_node_express
+      - run:
+          name: audit scan
+          command: jf audit --format=table
   docker-build:
     machine:
       image: ubuntu-2204:2022.04.2
@@ -17,7 +39,7 @@ jobs:
           command: curl -fL https://install-cli.jfrog.io | sh
       - run:
           name: cli config
-          command: jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa
+          command: jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
       - run:
           name: docker pull
           command: docker pull nginx:latest
@@ -31,3 +53,4 @@ workflows:
   sample:
     jobs:
       - docker-build
+      - normal-scan
