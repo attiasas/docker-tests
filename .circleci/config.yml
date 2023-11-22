@@ -15,7 +15,7 @@ jobs:
     steps:
       - run:
           name: install cli 
-          command: curl -u assafa:${JF_PLATFORM_PASS} -fL https://ecosysjfrog.jfrog.io/artifactory/generic-local/jf -O
+          command: curl -u assafa:${JF_PLATFORM_PASS} -fL https://ecosysjfrog.jfrog.io/artifactory/generic-local/jf -O && chmod +x jf
       - run:
           name: cli config
           command: ./jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
