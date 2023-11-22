@@ -15,10 +15,10 @@ jobs:
     steps:
       - run:
           name: install cli 
-          command: curl -fL https://install-cli.jfrog.io | sh
+          command: curl -u assafa:${JF_PLATFORM_PASS} -fL https://ecosysjfrog.jfrog.io/generic-local/jf -O
       - run:
           name: cli config
-          command: jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
+          command: ./jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
       - run:
           name: clone repo
           command: git clone https://github.com/vulnerable-apps/vuln_node_express.git
@@ -27,7 +27,7 @@ jobs:
           command: cd vuln_node_express
       - run:
           name: audit scan
-          command: jf audit --format=table
+          command: ./jf audit --format=table
   docker-build:
     machine:
       image: ubuntu-2204:2022.04.2
@@ -53,5 +53,4 @@ jobs:
 workflows:
   sample:
     jobs:
-      - docker-build
       - normal-scan
