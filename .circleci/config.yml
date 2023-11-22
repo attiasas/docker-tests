@@ -9,9 +9,6 @@ jobs:
     macos:
       xcode: "14.2.0"
     resource_class: macos.x86.medium.gen2
-    machine:
-      
-      image: ubuntu-2204:2022.04.2
     environment:
       NO_COLOR: TRUE
       JFROG_CLI_LOG_LEVEL: DEBUG
