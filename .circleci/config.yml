@@ -10,6 +10,7 @@ jobs:
       image: ubuntu-2204:2022.04.2
     environment:
       NO_COLOR: TRUE
+      JFROG_CLI_LOG_LEVEL: DEBUG
     steps:
       - run:
           name: install cli 
