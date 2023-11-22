@@ -8,6 +8,8 @@ jobs:
   docker-build:
     machine:
       image: ubuntu-2204:2022.04.2
+    environment:
+      NO_COLOR: TRUE
     steps:
       - run:
           name: install cli 
