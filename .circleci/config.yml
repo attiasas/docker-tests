@@ -37,16 +37,16 @@ jobs:
     steps:
       - run:
           name: install cli 
-          command: curl -fL https://getcli.jfrog.io/v2-jf | sh -s 2.32.0
+          command: curl -fL https://getcli.jfrog.io/v2-jf | sh -s 2.32.0 && chmod +x jf
       - run:
           name: cli config
-          command: jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
+          command: ./jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
       - run:
           name: docker pull
           command: docker pull nginx:latest
       - run:
           name: docker scan
-          command: jf docker scan nginx:latest --format=table
+          command: ./jf docker scan nginx:latest --format=table
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
