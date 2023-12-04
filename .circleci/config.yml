@@ -37,7 +37,7 @@ jobs:
     steps:
       - run:
           name: install cli 
-          command: curl -fL https://getcli.jfrog.io/v2-jf | sh -s 2.31.0 && chmod +x jf
+          command: curl -fL https://getcli.jfrog.io/v2-jf | sh -s 2.52.0 && chmod +x jf
       - run:
           name: cli config
           command: ./jf config add jfrog-test --url=https://ecosysjfrog.jfrog.io/ --password=${JF_PLATFORM_PASS} --user=assafa --overwrite
@@ -53,4 +53,4 @@ jobs:
 workflows:
   sample:
     jobs:
-      - normal-scan
+      - docker-build
