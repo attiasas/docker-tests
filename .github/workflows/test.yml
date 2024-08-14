@@ -1,0 +1,12 @@
+name: "testWorkflowName"
+
+on:
+  push:
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Test work flow'
+        run: echo "TESTING"
+        
